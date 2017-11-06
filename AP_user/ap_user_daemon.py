@@ -4,9 +4,11 @@ import sys
 import commands
 import time
 
-# 17/10/30
+
 # 라즈베리파이가 켜지면 자동으로 돌아가는 데몬. 공유기 접속자의 출입을 모니터링 하여 user.log를 만든다. 
 # user.log는 DHCP를 할당받거나 disassociated한 기록이 담겨 있다.
+
+# 2017.10.30 complete
 class Daemon:
 	def check_line(self): 
 		(line_status, lines)=commands.getstatusoutput("cat /var/log/daemon.log|wc -l")
