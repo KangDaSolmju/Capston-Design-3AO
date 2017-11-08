@@ -20,9 +20,10 @@ class Login:
 			(status1,question)=commands.getstatusoutput("sed -n "+str(i)+"p questions")
 			if status1==0:
 				question_list.append(question)
-
+		num=1
 		for question in question_list:
-			os.system("curl -d 'speaker=jinho&speed=0&text="+question+"' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > Q_"+question+".mp3")
+			os.system("curl -d 'speaker=jinho&speed=0&text="+question+"' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > Q_"+str(num)+".mp3")
+			num=num+1
 		
 
 		'''
