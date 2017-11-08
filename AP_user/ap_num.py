@@ -59,5 +59,6 @@ if __name__=="__main__":
         un=UserNum()
         dhcpack_list=un.make_dhcp_list()
         user_account=un.make_real_userlist(dhcpack_list)
+	os.system("curl -d 'speaker=jinho&speed=0&text=현재 공유기 접속 인원은 "+str(user_account)+"명 입니다' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > ap_num.mp3")
 	print(user_account)
 
