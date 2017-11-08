@@ -27,6 +27,11 @@ class Change_passwd:
 			
 			
 if __name__=="__main__":
-	c_passwd=Change_passwd()
-	c_passwd.change()
-	os.system("curl -d 'speaker=jinho&speed=0&text=비밀번호가 정상적으로 변경되었습니다.' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > change_result.mp3")
+	try:
+		if sys.argv[2]=="1":
+			c_passwd=Change_passwd()
+			c_passwd.change()
+			os.system("aplay change_passwd_result.mp3")
+	except:
+		os.system("aplay please_admin.mp3")
+		sys.exit(1)

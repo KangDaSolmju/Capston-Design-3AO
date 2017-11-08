@@ -6,12 +6,11 @@
 import commands
 import os
 import sys
-class Change_passwd:
+class Change_ssid:
 	def change(self):
 		bak="/etc/hostapd/hostapd.bak"
 		origin="/etc/hostapd/hostapd.conf"
 		
-		# 백업파일 생성(비밀번호가 변경된 hostapd.conf 임시파일)
 		os.system("sudo cp "+origin+" "+bak)
 		
 		# 이전 비밀번호 알아내기
@@ -26,6 +25,11 @@ class Change_passwd:
 			
 			
 if __name__=="__main__":
-	c_passwd=Change_passwd()
-	c_passwd.change()
-	os.system("curl -d 'speaker=jinho&speed=0&text=ssid가 정상적으로 변경되었습니다.' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > ssid_result.mp3")
+	try:
+		if sys.argv[2]=="1":
+			c_ssid=Change_ssid()
+			c_ssid.change()
+			os.system("aplay change_ssid_result.mp3")
+	except:
+		os.system("aplay please_admin.mp3")
+		sys.exit(1)
