@@ -26,6 +26,7 @@ class Login:
 		for question in question_list:
 			# 음원 재생(질문)
 			os.system("curl -d 'speaker=jinho&speed=0&text="+question+"' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > Q_"+str(num)+".mp3")
+			os.system("omxplayer Q_"+str(num)+".mp3")
 			num=num+1
 			# 여기서 음성인식 시작. (답)
 			os.system("curl -o 3ao_login.txt -X POST --data-binary @3ao.wav --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=ko&key=AIzaSyC0SpDwgok-dLZrQtiAbdx1bA3p4_TCWNk'")
@@ -38,4 +39,4 @@ class Login:
 if __name__ == "__main__":
 	login=Login()
 	login.admin_login()
-	os.system("aplay admin_login_result.mp3")
+	os.system("omxplayer admin_login_result.mp3")
