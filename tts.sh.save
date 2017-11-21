@@ -1,3 +1,0 @@
-#!/bin/bash
-
-curl -o "$1.mp3" -d "speaker=jinho&speed=2&text= $1" "https://openapi.naver.com/v1/voice/tts.bin" -H "Content-Type: application/x-www-form-urlencoded" -H "X-Naver-Client-Id: aCK&&tlt3QgmepTETONi" -H "X-Naver-Client-Secret: "7kA9fpuTAw"

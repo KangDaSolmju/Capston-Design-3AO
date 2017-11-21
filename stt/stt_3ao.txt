@@ -1,2 +1,2 @@
 {"result":[]}
-{"result":[{"alternative":[{"transcript":"캡스톤 프로젝트","confidence":0.26569861},{"transcript":"깨끗한 프로젝트"},{"transcript":"데프콘 프로젝트"},{"transcript":"내 폰 프로젝트"},{"transcript":"아이폰 프로젝트"}],"final":true}],"result_index":0}
+{"result":[{"alternative":[{"transcript":"금화초등학교","confidence":0.10872625},{"transcript":"도마초등학교"},{"transcript":"범어초등학교"},{"transcript":"꼬마 초등학교"},{"transcript":"도마 초등학교"}],"final":true}],"result_index":0}

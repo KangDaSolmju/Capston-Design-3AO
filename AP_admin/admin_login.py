@@ -29,6 +29,8 @@ class Login:
 			os.system("omxplayer Q_"+str(num)+".mp3")
 			num=num+1
 			# 여기서 음성인식 시작. (답)
+			os.system("rm -rf 3ao.wav")
+			os.system("arecord -D 'plughw:1,0' -f S16_LE -t wav -r 16000 -d 4 > 3ao.wav")
 			os.system("curl -o 3ao_login.txt -X POST --data-binary @3ao.wav --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=ko&key=AIzaSyC0SpDwgok-dLZrQtiAbdx1bA3p4_TCWNk'")
 			# answers파일에 붙이기
 			os.system("cat 3ao_login.txt | sed -n 2p | cut -d : -f4 | cut -d , -f1 | cut -d \\\" -f2 >> answers")

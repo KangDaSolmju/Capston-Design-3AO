@@ -16,9 +16,10 @@ class Admin_Setting():
 	# 사용자 인증
 	def admin_authen(self):
 		flag=0
+		
 		ans=["사과","배","배"] #사용자가 말한 답을 저장할 리스트
 		for i in range(1,4):
-			os.system("aplay Q_"+str(i)+".mp3") #질문
+			os.system("omxplayer Q_"+str(i)+".mp3") #질문
 			
 			# 여기서 음성인식 동작. 사용자는 답을 말한다. (파싱 하여 변수에 저장)
 			
@@ -29,32 +30,32 @@ class Admin_Setting():
 					#print(answer) 정답인 경우 
 					flag=1
 				else:
-					os.system("aplay ttang.mp3") #오답인 경우 하나라도 오답으로 걸리면 프로그램 종료.
+					os.system("omxplayer ttang.mp3") #오답인 경우 하나라도 오답으로 걸리면 프로그램 종료.
 					flag=0
 					sys.exit(1)
 		return flag
 		
 	def admin_setting(self,set_flag):
 		print(set_flag)
-		os.system("aplay jungdab.mp3")
+		os.system("omxplayer jungdab.mp3")
 		
 		# 여기에 음성인식 동작. 사용자는 1) "비밀번호/ssid를 변경" 혹은 2) "나 이외 차단"을 말할 수 있다.
 		user_request="비밀번호 변경" #음성인식 파싱 했을 때 값(예시)
 		if "비밀번호 변경" in user_request:
 			print("비밀번호 변경")
-			os.system("aplay tellme_newpw.mp3")
+			os.system("omxplayer tellme_newpw.mp3")
 			new_passwd="12312312"# 여기도 음성인식 동작. 사용자는 새로운 비밀번호를 말한다.
 			#os.system("python change_passwd.py "+str(new_passwd)+" "+str(set_flag))
 		elif "ssid 변경" in user_request:
 			print("ssid 변경")
-			os.system("aplay tellme_newsid.mp3")
+			os.system("omxplayer tellme_newsid.mp3")
 			new_sid="3ao3ao"# 여기도 음성인식 동작. 사용자는 새로운 ssid를 말한다.
 			#os.system("python change_ssid.py "+str(new_sid)+" "+str(set_flag))
 		elif "나 이외 차단" in user_request:
 			print("나 이외 차단")
 			#os.system("python ../AP_block/blocking.py "+str(set_flag))
 		else:
-			os.system("aplay wrong_request.mp3")
+			os.system("omxplayer wrong_request.mp3")
 
 
 if __name__ =="__main__":
