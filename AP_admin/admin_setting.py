@@ -17,16 +17,22 @@ class Admin_Setting():
 	def admin_authen(self):
 		flag=0
 		
-		ans=["사과","배","배"] #사용자가 말한 답을 저장할 리스트
+		ans=[] #사용자가 말한 답을 저장할 리스트
+		
 		for i in range(1,4):
 			os.system("omxplayer Q_"+str(i)+".mp3") #질문
 			
 			# 여기서 음성인식 동작. 사용자는 답을 말한다. (파싱 하여 변수에 저장)
-			
+			os.system("rm -rf 3ao.wav")
+			os.system("arecord -D 'plughw:1,0' -f S16_LE -t wav -r 16000 -d 4 > 3ao.wav")	
+			os.system("curl -o stt_3ao.txt -X POST --data-binary @3ao.wav --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=ko&key=AIzaSyC0SpDwgok-dLZrQtiAbdx1bA3p4_TCWNk'")
+			os.system("sudo cat stt_3ao.txt | sed -n 2p | cut -d : -f4 | cut -d , -f1 | cut -d \\\" -f2 > stt_3ao2.txt")
+
 			# ans[i-1]과 answers의 i번째 행이 같은지 판단.
 			(status1,answer)=commands.getstatusoutput("sed -n "+str(i)+"p answers")
+			(status2,ans)=commands.getstatusoutput("sed -n 1p stt_3ao2.txt")
 			if status1==0:
-				if ans[i-1]==answer:
+				if ans==answer:
 					#print(answer) 정답인 경우 
 					flag=1
 				else:
@@ -40,18 +46,32 @@ class Admin_Setting():
 		os.system("omxplayer jungdab.mp3")
 		
 		# 여기에 음성인식 동작. 사용자는 1) "비밀번호/ssid를 변경" 혹은 2) "나 이외 차단"을 말할 수 있다.
-		user_request="비밀번호 변경" #음성인식 파싱 했을 때 값(예시)
-		if "비밀번호 변경" in user_request:
+		os.system("rm -rf 3ao.wav")
+		os.system("arecord -D 'plughw:1,0' -f S16_LE -t wav -r 16000 -d 4 > 3ao.wav")
+		os.system("curl -o stt_3ao.txt -X POST --data-binary @3ao.wav --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=ko&key=AIzaSyC0SpDwgok-dLZrQtiAbdx1bA3p4_TCWNk'")
+		os.system("sudo cat stt_3ao.txt | sed -n 2p | cut -d : -f4 | cut -d , -f1 | cut -d \\\" -f2 > stt_3ao2.txt")
+		(status3,user_request)=commands.getstatusoutput("sed -n 1p stt_3ao2.txt")
+
+		#user_request="비밀번호 변경" #음성인식 파싱 했을 때 값(예시)
+		if "비밀번호 변경" in user_request or "비밀번호 변경해 줘" in user_request:
 			print("비밀번호 변경")
 			os.system("omxplayer tellme_newpw.mp3")
-			new_passwd="12312312"# 여기도 음성인식 동작. 사용자는 새로운 비밀번호를 말한다.
-			#os.system("python change_passwd.py "+str(new_passwd)+" "+str(set_flag))
-		elif "ssid 변경" in user_request:
+			#new_passwd="12312312"# 여기도 음성인식 동작. 사용자는 새로운 비밀번호를 말한다.
+		
+			os.system("rm -rf 3ao.wav")
+                	os.system("arecord -D 'plughw:1,0' -f S16_LE -t wav -r 16000 -d 4 > 3ao.wav")
+                	os.system("curl -o stt_3ao.txt -X POST --data-binary @3ao.wav --header 'Content-Type: audio/l16; rate=16000;' 'https://www.google.com/speech-api/v2/recognize?output=json&lang=ko&key=AIzaSyC0SpDwgok-dLZrQtiAbdx1bA3p4_TCWNk'")
+                	os.system("sudo cat stt_3ao.txt | sed -n 2p | cut -d : -f4 | cut -d , -f1 | cut -d \\\" -f2 > stt_3ao2.txt")
+                	(status4,new_passwd)=commands.getstatusoutput("sed -n 1p stt_3ao2.txt")
+			new_passwd=new_passwd.strip().replace(" ","")
+			os.system("python change_passwd.py "+str(new_passwd)+" "+str(set_flag))
+		elif "ssid 변경" in user_request or "ssid 변경해 줘" in user_request:
 			print("ssid 변경")
 			os.system("omxplayer tellme_newsid.mp3")
 			new_sid="3ao3ao"# 여기도 음성인식 동작. 사용자는 새로운 ssid를 말한다.
-			#os.system("python change_ssid.py "+str(new_sid)+" "+str(set_flag))
-		elif "나 이외 차단" in user_request:
+			new_sid=new_sid.strip().replace(" ","")
+			os.system("python change_ssid.py "+str(new_sid)+" "+str(set_flag))
+		elif "마이 왜 차단" in user_request or "마이 왜 차단해 줘" in user_request:
 			print("나 이외 차단")
 			#os.system("python ../AP_block/blocking.py "+str(set_flag))
 		else:

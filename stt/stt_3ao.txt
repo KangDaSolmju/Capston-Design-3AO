@@ -1,2 +1,2 @@
 {"result":[]}
-{"result":[{"alternative":[{"transcript":"금화초등학교","confidence":0.10872625},{"transcript":"도마초등학교"},{"transcript":"범어초등학교"},{"transcript":"꼬마 초등학교"},{"transcript":"도마 초등학교"}],"final":true}],"result_index":0}
+{"result":[{"alternative":[{"transcript":"안녕하세요","confidence":0.61067152},{"transcript":"안녕 하세요"},{"transcript":"안 녕 하 세요"},{"transcript":"안 녕 하세요"}],"final":true}],"result_index":0}

@@ -1,0 +1,2 @@
+{"result":[]}
+{"result":[{"alternative":[{"transcript":"12345678","confidence":0.62199986},{"transcript":"1 2 3 4 5 6 7 8"},{"transcript":"일이삼사오륙칠팔"},{"transcript":"일이삼사오육칠팔"},{"transcript":"일이삼사 오육 칠팔"}],"final":true}],"result_index":0}

@@ -29,7 +29,9 @@ if __name__=="__main__":
 		if sys.argv[2]=="1":
 			c_ssid=Change_ssid()
 			c_ssid.change()
-			os.system("aplay change_ssid_result.mp3")
+			os.system("sudo systemctl restart hostapd")
+			os.system("omxplayer change_passwd_result.mp3")
+			#os.system("sudo reboot")
 	except:
-		os.system("aplay please_admin.mp3")
+		os.system("omxplayer please_admin.mp3")
 		sys.exit(1)
