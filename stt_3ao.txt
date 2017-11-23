@@ -1,0 +1,2 @@
+{"result":[]}
+{"result":[{"alternative":[{"transcript":"뭐야","confidence":0.72343647}],"final":true}],"result_index":0}
