@@ -14,7 +14,9 @@ class SAP:
 		KEY_CONST1="어드민"
 		KEY_CONST2="사용자"
 		KEY_CONST3="시작"
-		os.system("rm -rf start.wav")
+		KEY_CONST4="비밀번호"
+		KEY_CONST5="ssid"
+		KEY_CONST6="차단"
 		os.system("omxplayer start.wav")
 		while(1):
 			print("SAP_daemon...")
@@ -30,6 +32,11 @@ class SAP:
 			elif KEY_CONST3 in cmd:
 				print("시작")
 				os.system("cd AP_restart;python restart.py")
+			elif KEY_CONST4 in cmd | KEY_CONST5 in cmd:
+				os.system("cd AP_admin;omxplayer please_admin.mp3")
+			elif KEY_CONST6 in cmd:
+				print("나 이외 차단")
+				#os.system("cd AP_block;python block.py")
 			else:
 				print("이해하지 못했습니다.")
 				#os.system("omxplayer notmyway.wav")

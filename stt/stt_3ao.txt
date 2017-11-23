@@ -1,2 +1,2 @@
 {"result":[]}
-{"result":[{"alternative":[{"transcript":"다시 시작해 줘","confidence":0.72217387},{"transcript":"다시시작해 줘"},{"transcript":"가시 시작해 줘"},{"transcript":"다시 시작 해 줘"},{"transcript":"가수 시작해 줘"}],"final":true}],"result_index":0}
+{"result":[{"alternative":[{"transcript":"마이 웹 차단","confidence":0.40531549},{"transcript":"마이 왜 차단"},{"transcript":"빠이 왜 차단"},{"transcript":"바이 왜 차단"},{"transcript":"나이 왜 차단"}],"final":true}],"result_index":0}

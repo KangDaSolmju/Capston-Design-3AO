@@ -1,2 +1,2 @@
 {"result":[]}
-{"result":[{"alternative":[{"transcript":"뭐야","confidence":0.72343647}],"final":true}],"result_index":0}
+{"result":[{"alternative":[{"transcript":"사용자수","confidence":0.14285713},{"transcript":"사용자 수"},{"transcript":"허영자 써"},{"transcript":"하영 잤어"},{"transcript":"서영 잤어"}],"final":true}],"result_index":0}
