@@ -11,13 +11,16 @@ import time
 # 2017.10.30 complete
 class Daemon:
 	def check_line(self): 
+		if os.path.isfile("user.log") or os.path.isfile("find_admin"):
+			os.system("sudo rm ./user.log")
+			os.system("sudo rm ./find_admin")
 		(line_status, lines)=commands.getstatusoutput("cat /var/log/daemon.log|wc -l")
 		while(1):
 			(line_status2, lines2)=commands.getstatusoutput("cat /var/log/daemon.log|wc -l")
 			if int(lines)<int(lines2):
 				print('different')
 				line_num=int(lines2)-int(lines) #추가된 라인 수
-				os.system("tail -"+str(line_num)+" /var/log/daemon.log | grep -w 'DHCPACK\|IEEE 802.11: disassociated' > ./user.log")
+				os.system("tail -"+str(line_num)+" /var/log/daemon.log | grep -w 'DHCPACK\|IEEE 802.11: disassociated' >> ./user.log")
 				lines=lines2
 			time.sleep(1)
 			

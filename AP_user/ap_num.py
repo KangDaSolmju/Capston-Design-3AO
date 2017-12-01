@@ -13,21 +13,28 @@ class UserNum:
 	# 중복을 제거하여 리턴한다.
         def make_dhcp_list(self):
                 dhcpack_list=[]
+		DHCPACK_list=[]
                 (line_status,lines)=commands.getstatusoutput("cat user.log | wc -l") #user.log의 라인 수
                 for line in range(int(lines),0,-1):
                         (dhcp_status,dhcpack)=commands.getstatusoutput("cat user.log | sed -n "+str(line)+"p")
                         dhcp_ack=re.split(" ",dhcpack)
-                        if 'DHCPACK' in dhcp_ack[5]:
+                        if 'DHCPACK' in dhcp_ack[6]:
                                 dhcpack_list.append(dhcp_ack)
 
-                # i, j(i+1)번째의 dhcpack_list[5]를 비교하고, 같으면 j번째 데이터를 지우고, dhcpack_list를 정정한다.
+                # i, j(i+1)번째의 dhcpack_list[7](맥주소)를 비교하고, 같으면 j번째 데이터를 지우고, dhcpack_list를 정정한다.
 		# dhcpack_list는 user.log에서 중복을 제거한 최근에 공유기에 접속한 사용자 리스트.
-                for i in range(0,len(dhcpack_list)-1):
-                        for j in range(i+1,len(dhcpack_list)):
-                                if dhcpack_list[i][7]==dhcpack_list[j][7]:
-                                        del dhcpack_list[j]
+		len_dhcpack=len(dhcpack_list)
+		for i in range(0,len_dhcpack-1): # 길이가 4인 경우 3번 반복.(0,1,2)
+			for j in range(i+1,len_dhcpack): # 길이 4인 경우 0->1,2,3 / 1->2,3 / 2->3
+				if dhcpack_list[i][8]==dhcpack_list[j][8]:
+					dhcpack_list[j][8]="delete"
 
-                return dhcpack_list
+		DHCPACK_list=[]
+		for k in range(0,len_dhcpack):
+			if "delete" not in dhcpack_list[k][8]:
+				DHCPACK_list.append(dhcpack_list[k][8])
+				
+                return DHCPACK_list
 
 
         def make_real_userlist(self, dhcpack_list):
@@ -50,16 +57,25 @@ class UserNum:
 						for i in range(0,len(dhcpack_list)):
 							if dhcpack_list[i][7]==dhcp_mac:
 								del dhcpack_list[i]
-		return len(dhcpack_list)
+		return dhcpack_list,len(dhcpack_list)
+	
+
+	def find_admin(self,user_ack):
+		for i in range(0,len(user_ack)):
+			join_str="".join(user_ack[i])
+			os.system("echo '"+join_str+"' > find_admin")
 
 
 if __name__=="__main__":
         dhcpack_list=[]
+	user_ack=[]
 	user_account=0
         un=UserNum()
         dhcpack_list=un.make_dhcp_list()
-        user_account=un.make_real_userlist(dhcpack_list)
-	os.system("curl -d 'speaker=jinho&speed=0&text=공유기 사용 인원은 "+str(user_account)+"명 입니다' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > ap_num.mp3")
+        user_ack,user_account=un.make_real_userlist(dhcpack_list)
+	un.find_admin(user_ack)
+
+	#os.system("curl -d 'speaker=jinho&speed=0&text=공유기 사용 인원은 "+str(user_account)+"명 입니다' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > ap_num.mp3")
 	print(user_account)
-	os.system("omxplayer ap_num.mp3")
+	#os.system("omxplayer ap_num.mp3")
 

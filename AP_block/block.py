@@ -7,4 +7,4 @@ class Block:
 
 if __name__=="__main__":
 	block=Block()
-	block.block.mac()	
+	block.block_mac()	

@@ -32,7 +32,8 @@ class SAP:
 			elif KEY_CONST3 in cmd:
 				print("시작")
 				os.system("cd AP_restart;python restart.py")
-			elif KEY_CONST4 in cmd | KEY_CONST5 in cmd:
+			elif KEY_CONST4 in cmd or KEY_CONST5 in cmd:
+				os.system("권한이 없습니다. 어드민으로 로그인하세요")
 				os.system("cd AP_admin;omxplayer please_admin.mp3")
 			elif KEY_CONST6 in cmd:
 				print("나 이외 차단")
