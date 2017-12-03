@@ -17,6 +17,8 @@ class SAP:
 		KEY_CONST4="비밀번호"
 		KEY_CONST5="ssid"
 		KEY_CONST6="차단"
+		KEY_CONST7="허용"
+		KEY_CONST8="풀어 줘"
 		os.system("omxplayer start.wav")
 		while(1):
 			print("SAP_daemon...")
@@ -36,8 +38,11 @@ class SAP:
 				os.system("권한이 없습니다. 어드민으로 로그인하세요")
 				os.system("cd AP_admin;omxplayer please_admin.mp3")
 			elif KEY_CONST6 in cmd:
-				print("나 이외 차단")
-				#os.system("cd AP_block;python block.py")
+				os.system("권한이 없습니다. 어드민으로 로그인하세요")
+				os.system("cd AP_admin;omxplayer please_admin.mp3")
+			elif KEY_CONST7 in cmd or KEY_CONST8 in cmd:
+				os.system("권한이 없습니다. 어드민으로 로그인하세요")
+				os.system("cd AP_admin;omxplayer please_admin.mp3")
 			else:
 				print("이해하지 못했습니다.")
 				#os.system("omxplayer notmyway.wav")

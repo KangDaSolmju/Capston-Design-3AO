@@ -73,7 +73,10 @@ class Admin_Setting():
 			os.system("python change_ssid.py "+str(new_sid)+" "+str(set_flag))
 		elif "마이 왜 차단" in user_request or "마이 왜 차단해 줘" in user_request:
 			print("나 이외 차단")
-			#os.system("python ../AP_block/blocking.py "+str(set_flag))
+			os.system("cd ../AP_block;python block.py "+str(set_flag))
+		elif "허용" in user_request or "풀어 줘" in user_request:
+			print("허용")
+			os.system("cd ../AP_block;python unblock.py "+str(set_flag))
 		else:
 			os.system("omxplayer wrong_request.mp3")
 

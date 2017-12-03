@@ -32,7 +32,7 @@ class UserNum:
 		DHCPACK_list=[]
 		for k in range(0,len_dhcpack):
 			if "delete" not in dhcpack_list[k][8]:
-				DHCPACK_list.append(dhcpack_list[k][8])
+				DHCPACK_list.append(dhcpack_list[k][7])
 				
                 return DHCPACK_list
 
