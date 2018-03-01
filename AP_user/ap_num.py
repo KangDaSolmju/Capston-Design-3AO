@@ -75,7 +75,7 @@ if __name__=="__main__":
         user_ack,user_account=un.make_real_userlist(dhcpack_list)
 	un.find_admin(user_ack)
 
-	os.system("curl -d 'speaker=jinho&speed=0&text=공유기 사용 인원은 "+str(user_account)+"명 입니다.' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > ap_num.mp3")
+	#os.system("curl -d 'speaker=jinho&speed=0&text=공유기 사용 인원은 "+str(user_account)+"명 입니다.' 'https://openapi.naver.com/v1/voice/tts.bin' -H 'Content-Type: application/x-www-form-urlencoded' -H 'X-Naver-Client-Id: wY8qYOdN9FzbBBrgtlF3' -H 'X-Naver-Client-Secret: _dblCskdHA' > ap_num.mp3")
 	print(user_account)
 	#os.system("omxplayer ap_num.mp3")
 
